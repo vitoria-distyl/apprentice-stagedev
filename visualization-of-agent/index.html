@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stagehand Agent Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            background: linear-gradient(135deg, #f8fafb 0%, #f4f6f8 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(248,250,251,0.9) 100%);
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            color: #374151;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            transition: background-color 0.3s ease;
+        }
+
+        .status-dot.connected {
+            background: #10b981;
+        }
+
+        .canvas-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #workflow-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .node {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(209, 213, 219, 0.6);
+            border-radius: 16px;
+            padding: 16px 20px;
+            min-width: 200px;
+            max-width: 280px;
+            backdrop-filter: blur(10px);
+            box-shadow:
+                0 1px 3px rgba(0, 0, 0, 0.08),
+                0 4px 6px rgba(0, 0, 0, 0.04),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+            cursor: default;
+        }
+
+        .node.pending {
+            opacity: 0.6;
+            border-color: rgba(156, 163, 175, 0.4);
+        }
+
+        .node.in-progress {
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow:
+                0 0 0 1px rgba(59, 130, 246, 0.2),
+                0 4px 12px rgba(59, 130, 246, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            transform: scale(1.02);
+        }
+
+        .node.completed {
+            border-color: rgba(16, 185, 129, 0.6);
+            box-shadow:
+                0 0 0 1px rgba(16, 185, 129, 0.2),
+                0 4px 12px rgba(16, 185, 129, 0.1),
+                0 1px 3px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+
+        .node-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .node-description {
+            font-size: 11px;
+            color: #6b7280;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .node-status {
+            font-size: 10px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #d1d5db;
+        }
+
+        .node.in-progress .status-indicator {
+            background: #3b82f6;
+            animation: pulse 2s infinite;
+        }
+
+        .node.completed .status-indicator {
+            background: #10b981;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .connection {
+            position: absolute;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .connection-path {
+            fill: none;
+            stroke: rgba(156, 163, 175, 0.4);
+            stroke-width: 2;
+            transition: stroke 0.3s ease;
+        }
+
+        .connection.active .connection-path {
+            stroke: rgba(59, 130, 246, 0.6);
+            stroke-dasharray: 4 4;
+            animation: dash 1s linear infinite;
+        }
+
+        .connection.completed .connection-path {
+            stroke: rgba(16, 185, 129, 0.5);
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -8; }
+        }
+
+        .workflow-info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(209, 213, 219, 0.6);
+            border-radius: 12px;
+            padding: 16px;
+            backdrop-filter: blur(10px);
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+        }
+
+        .workflow-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .workflow-progress {
+            font-size: 11px;
+            color: #6b7280;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(229, 231, 235, 0.8);
+            border-radius: 2px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        @media (max-width: 768px) {
+            .node {
+                min-width: 160px;
+                max-width: 200px;
+                padding: 12px 16px;
+            }
+
+            .node-title {
+                font-size: 12px;
+            }
+
+            .node-description {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Stagehand Agent</h1>
+            <div class="status">
+                <div class="status-dot" id="connection-status"></div>
+                <span id="connection-text">Connecting...</span>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <svg id="workflow-canvas" width="100%" height="100%">
+                <defs>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="workflow-info" id="workflow-info" style="display: none;">
+            <div class="workflow-title">Workflow Progress</div>
+            <div class="workflow-progress">
+                <span id="progress-text">0 of 0 steps completed</span>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="visualization.js"></script>
+</body>
+</html>

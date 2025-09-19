@@ -1,0 +1,9 @@
+{
+  "name": "stagehand-visualization",
+  "version": "1.0.0",
+  "description": "Real-time visualization for Stagehand agent workflows",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js"
+  }
+}

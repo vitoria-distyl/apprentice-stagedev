@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/vitoria_lima/Desktop/sept-19/stagehand-agent/**)",
+      "Read(//var/folders/vq/rsf2kfnj5wz38dkm46fq09qh0000gn/T/TemporaryItems/NSIRD_screencaptureui_PuXeps/**)",
+      "Read(//var/folders/vq/rsf2kfnj5wz38dkm46fq09qh0000gn/T/TemporaryItems/NSIRD_screencaptureui_1CMPNF/**)",
+      "Bash(tsx:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm start)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "Read(//var/folders/vq/rsf2kfnj5wz38dkm46fq09qh0000gn/T/TemporaryItems/NSIRD_screencaptureui_o6J6P1/**)",
+      "Read(//Users/vitoria_lima/Desktop/sept-19/emr-website/**)",
+      "Read(//var/folders/vq/rsf2kfnj5wz38dkm46fq09qh0000gn/T/TemporaryItems/NSIRD_screencaptureui_gMnFvx/**)",
+      "Read(//var/folders/vq/rsf2kfnj5wz38dkm46fq09qh0000gn/T/TemporaryItems/NSIRD_screencaptureui_gCX9Wd/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

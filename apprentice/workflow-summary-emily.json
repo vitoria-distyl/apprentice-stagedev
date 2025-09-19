@@ -1,0 +1,288 @@
+{
+  "session_id": "c23eacd9-0ee6-4657-a0ba-f82cd94c7d95",
+  "session_start": "2025-09-18T20:41:16.765000+00:00",
+  "session_end": "2025-09-18T20:43:02.017000+00:00",
+  "session_duration_seconds": 105.25,
+  "total_steps": 20,
+  "total_actions": 41,
+  "total_api_calls": 17,
+  "steps": [
+    {
+      "id": "a39de607-0cba-45bf-9920-c4bedd9a28f1",
+      "name": "User repeatedly clicked on Emily Carter's details in the patient dashboard.",
+      "timestamp": "2025-09-18T20:41:20.988000+00:00",
+      "index": 1,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [
+        "step0/screenshots/screenshot_step0_1.jpg"
+      ],
+      "underlying_intents": []
+    },
+    {
+      "id": "0821bd32-6100-476b-8a89-0648ec981ef6",
+      "name": "User clicked on a post-surgical recovery status for a patient.",
+      "timestamp": "2025-09-18T20:41:30.105000+00:00",
+      "index": 2,
+      "user_explanation": null,
+      "api_calls": [
+        "GET https://meet.google.com/meetsw.js_data?_reqid=60092&rt=j"
+      ],
+      "screenshots": [],
+      "underlying_intents": [
+        "Perform a GET request to retrieve data from the Google Meet service."
+      ]
+    },
+    {
+      "id": "a489f64b-effb-4077-8858-8e504b6c1338",
+      "name": "User views detailed information for patient Emily Carter.",
+      "timestamp": "2025-09-18T20:41:32.138000+00:00",
+      "index": 3,
+      "user_explanation": null,
+      "api_calls": [
+        "GET http://localhost:3006/patient/1?_rsc=1wtp7",
+        "GET http://localhost:3006/patient/1?_rsc=1ndpc"
+      ],
+      "screenshots": [
+        "step2/screenshots/screenshot_step2_1.jpg",
+        "step2/screenshots/screenshot_step2_2.jpg",
+        "step2/screenshots/screenshot_step2_3.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve Emily Carter's patient details."
+      ]
+    },
+    {
+      "id": "01c2b4f0-7592-4f90-a587-33105dab4bee",
+      "name": "User selects the Mandibular/Maxillary Orthognathic Surgery option.",
+      "timestamp": "2025-09-18T20:41:36.255000+00:00",
+      "index": 4,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "f96adbf3-3845-447d-81d2-062fc0f4a92f",
+      "name": "User views details about the primary condition \"Mandibular/Maxillary Orthognathic Surgery.\"",
+      "timestamp": "2025-09-18T20:41:39.139000+00:00",
+      "index": 5,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "5e0487b3-9878-4d08-9c99-fc5cbb03ff9a",
+      "name": "User views patient guidelines.",
+      "timestamp": "2025-09-18T20:41:44.622000+00:00",
+      "index": 6,
+      "user_explanation": null,
+      "api_calls": [
+        "GET http://localhost:3006/patient/1/guidelines?_rsc=11ua2",
+        "GET http://localhost:3006/patient/1/guidelines?_rsc=1c3iy"
+      ],
+      "screenshots": [
+        "step5/screenshots/screenshot_step5_1.jpg",
+        "step5/screenshots/screenshot_step5_2.jpg",
+        "step5/screenshots/screenshot_step5_3.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve guidelines for patient with ID 1."
+      ]
+    },
+    {
+      "id": "a8371dba-b607-4821-b759-3bd9714a5d7b",
+      "name": "User reviewed clinical guidelines for orthognathic surgery.",
+      "timestamp": "2025-09-18T20:41:47.739000+00:00",
+      "index": 7,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "029413ac-cd42-4263-ba00-c1c70c28bfdd",
+      "name": "The user navigates back to the patient overview page.",
+      "timestamp": "2025-09-18T20:41:52.255000+00:00",
+      "index": 8,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [
+        "step7/screenshots/screenshot_step7_1.jpg"
+      ],
+      "underlying_intents": []
+    },
+    {
+      "id": "e1a37e6e-27a2-4c67-971f-51c8ae4352f2",
+      "name": "User navigates to view prior authorization details for orthognathic surgery.",
+      "timestamp": "2025-09-18T20:41:56.590000+00:00",
+      "index": 9,
+      "user_explanation": null,
+      "api_calls": [
+        "GET http://localhost:3006/patient/1/benefits?_rsc=ejaw2",
+        "GET http://localhost:3006/patient/1/benefits?_rsc=1htsa"
+      ],
+      "screenshots": [
+        "step8/screenshots/screenshot_step8_1.jpg",
+        "step8/screenshots/screenshot_step8_2.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve patient benefits information."
+      ]
+    },
+    {
+      "id": "fdb90286-54fe-4f3b-8f22-0e2d19d0d1f5",
+      "name": "The user is reviewing Emily Carter's prior authorization and encounter notes related to her orthognathic surgery.",
+      "timestamp": "2025-09-18T20:42:06.057000+00:00",
+      "index": 10,
+      "user_explanation": "I am a subject matter expert and I see the patient dashboard. I want to have a look at the patient that had surgery, like Emily Carter. I look at Emily Carter, I see that her primary condition is orthognathic surgery. I want to refresh my mind, so I look at the guideline and I see here the guideline for orthognathic surgery. I refresh my memory and I check her benefits and claims. I see that her prioritization is still pending.",
+      "api_calls": [
+        "GET http://localhost:3006/patient/1/prior-authorization?_rsc=e0auy",
+        "GET http://localhost:3006/patient/1/prior-authorization?_rsc=9zkcg",
+        "GET http://localhost:3006/patient/1/encounter-notes?_rsc=8vkoi",
+        "GET http://localhost:3006/patient/1/encounter-notes?_rsc=1avs8"
+      ],
+      "screenshots": [
+        "step9/screenshots/screenshot_step9_1.jpg",
+        "step9/screenshots/screenshot_step9_2.jpg",
+        "step9/screenshots/screenshot_step9_3.jpg",
+        "step9/screenshots/screenshot_step9_4.jpg",
+        "step9/screenshots/screenshot_step9_5.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve prior authorization details for the patient.",
+        "Perform a GET request to retrieve encounter notes for the patient."
+      ]
+    },
+    {
+      "id": "7c2f569d-be07-428f-a592-38c0ec04d35a",
+      "name": "The user reviewed encounter notes for a patient's bilateral mandibular and maxillary orthognathic surgery.",
+      "timestamp": "2025-09-18T20:42:13.890000+00:00",
+      "index": 11,
+      "user_explanation": "do not know the reason why, so check her encounter notes.",
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "62bf3c75-df4b-425c-9be4-12698f3651c5",
+      "name": "User reviews lab results for Emily Carter post-surgery.",
+      "timestamp": "2025-09-18T20:42:17.607000+00:00",
+      "index": 12,
+      "user_explanation": "I see that she had surgery already and I see that she was clear for surgery.",
+      "api_calls": [
+        "GET http://localhost:3006/patient/1/labs?_rsc=zc34v",
+        "GET http://localhost:3006/patient/1/labs?_rsc=1fmu5"
+      ],
+      "screenshots": [
+        "step11/screenshots/screenshot_step11_1.jpg",
+        "step11/screenshots/screenshot_step11_2.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve lab results for patient 1."
+      ]
+    },
+    {
+      "id": "b1823b01-92d6-40ed-815c-4f64f8aa4bdb",
+      "name": "User reviews post-operative lab results for Emily Carter.",
+      "timestamp": "2025-09-18T20:42:21.491000+00:00",
+      "index": 13,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "567d1d1c-f1b0-4bad-a95c-4080fc2b0709",
+      "name": "User accessed clinical guidelines for medically necessary, reconstructive, and cosmetic procedures.",
+      "timestamp": "2025-09-18T20:42:25.090000+00:00",
+      "index": 14,
+      "user_explanation": null,
+      "api_calls": [
+        "GET http://localhost:3006/patient/1/guidelines?_rsc=1lg5n"
+      ],
+      "screenshots": [
+        "step13/screenshots/screenshot_step13_1.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve patient guidelines."
+      ]
+    },
+    {
+      "id": "650a83fd-520e-43f8-b075-5103f6b9b3a7",
+      "name": "User reviewed abnormal lab results for Emily Carter.",
+      "timestamp": "2025-09-18T20:42:34.725000+00:00",
+      "index": 15,
+      "user_explanation": null,
+      "api_calls": [
+        "GET http://localhost:3006/patient/1?_rsc=b2xox"
+      ],
+      "screenshots": [
+        "step14/screenshots/screenshot_step14_1.jpg",
+        "step14/screenshots/screenshot_step14_2.jpg",
+        "step14/screenshots/screenshot_step14_3.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET on /patient/1 to retrieve patient information."
+      ]
+    },
+    {
+      "id": "60e3d0d2-fc02-4ad0-bc8c-d07e5e730f0f",
+      "name": "User navigates through the clinical dashboard to review patient benefits and prior authorizations.",
+      "timestamp": "2025-09-18T20:42:44.108000+00:00",
+      "index": 16,
+      "user_explanation": null,
+      "api_calls": [
+        "GET http://localhost:3006/patient/1/benefits?_rsc=16uya"
+      ],
+      "screenshots": [
+        "step15/screenshots/screenshot_step15_1.jpg"
+      ],
+      "underlying_intents": [
+        "Perform a GET request to retrieve patient benefits information."
+      ]
+    },
+    {
+      "id": "5a40ae86-a0af-48fe-9cd9-7593d8d3926f",
+      "name": "User initiates adding a comment to a pending authorization.",
+      "timestamp": "2025-09-18T20:42:49.810000+00:00",
+      "index": 17,
+      "user_explanation": null,
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "c27c32f3-a190-4988-a3a0-7af51e91430f",
+      "name": "The user reviewed patient labs, identified a missing sleep apnea test, and added a comment on a benefit claim.",
+      "timestamp": "2025-09-18T20:42:52.672000+00:00",
+      "index": 18,
+      "user_explanation": "I check her labs and I see that she has several labs but I check the guideline and by reading the guideline I remember that one of the checks that were supposed to happen was sleep apnea. I check the labs and trends. I see there is no sleep apnea or sleep compliance test. I go to the benefit claims, I click on her claim and I write a comment.",
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "ba29ded4-1e25-4ff2-800d-e60f00f17f05",
+      "name": "The user is adding a comment about a missing sleep apnea test in a prior authorization record.",
+      "timestamp": "2025-09-18T20:42:58.038000+00:00",
+      "index": 19,
+      "user_explanation": "Sleep",
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    },
+    {
+      "id": "8eecbaba-efb2-49ed-ad2d-ff08ffd3689f",
+      "name": "User adds a comment noting a missing sleep apnea test.",
+      "timestamp": "2025-09-18T20:42:59.676000+00:00",
+      "index": 20,
+      "user_explanation": "Yeah, test is missing",
+      "api_calls": [],
+      "screenshots": [],
+      "underlying_intents": []
+    }
+  ],
+  "generated_at": "2025-09-18T20:44:05.473542+00:00"
+}
