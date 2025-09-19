@@ -137,25 +137,39 @@ class WorkflowVisualization {
     }
 
     calculateNodePosition(index, totalSteps, containerWidth, containerHeight) {
-        // Calculate positions in a flowing curved layout
-        const centerX = containerWidth / 2;
-        const centerY = containerHeight / 2;
+        // Calculate positions in a flowing layout with better spacing
+        const nodeWidth = 280;
+        const nodeHeight = 100;
+        const minSpacing = 180; // Minimum distance between nodes
 
         if (totalSteps === 1) {
-            return { x: centerX - 140, y: centerY - 50 };
+            return { x: containerWidth / 2 - nodeWidth / 2, y: containerHeight / 2 - nodeHeight / 2 };
         }
 
-        // Create a gentle S-curve flow
-        const progress = index / (totalSteps - 1);
-        const angle = (progress - 0.5) * Math.PI * 0.8; // -0.4π to 0.4π
+        // Create a flowing layout with proper spacing
+        const cols = Math.ceil(Math.sqrt(totalSteps * 1.5)); // More horizontal spread
+        const rows = Math.ceil(totalSteps / cols);
 
-        const baseRadius = Math.min(containerWidth * 0.3, containerHeight * 0.25);
-        const x = centerX + Math.sin(angle) * baseRadius - 140;
-        const y = centerY + Math.cos(angle) * baseRadius * 0.6 - 50 + (progress * containerHeight * 0.2);
+        const col = index % cols;
+        const row = Math.floor(index / cols);
+
+        // Calculate grid spacing
+        const totalWidth = (cols - 1) * (nodeWidth + minSpacing);
+        const totalHeight = (rows - 1) * (nodeHeight + minSpacing);
+
+        const startX = (containerWidth - totalWidth) / 2;
+        const startY = (containerHeight - totalHeight) / 2;
+
+        // Add some organic curve to break the rigid grid
+        const progress = index / (totalSteps - 1);
+        const curveOffset = Math.sin(progress * Math.PI * 2) * 30;
+
+        const x = startX + col * (nodeWidth + minSpacing) + curveOffset;
+        const y = startY + row * (nodeHeight + minSpacing) + curveOffset * 0.5;
 
         return {
-            x: Math.max(50, Math.min(x, containerWidth - 330)),
-            y: Math.max(50, Math.min(y, containerHeight - 150))
+            x: Math.max(20, Math.min(x, containerWidth - nodeWidth - 20)),
+            y: Math.max(20, Math.min(y, containerHeight - nodeHeight - 20))
         };
     }
 
